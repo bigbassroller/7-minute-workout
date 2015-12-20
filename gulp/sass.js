@@ -12,7 +12,7 @@ Gulp.task('sass', function () {
             './app/scss/bootstrap.scss',
             './app/scss/font-awesome.scss',
             './app/scss/theme.scss',
-            './app/scss/custom.scss',
+            // './app/scss/custom.scss',
             './app/scss/style.scss'
         ],
         dest: './priv/static/css',

@@ -6,5 +6,6 @@ Gulp.task('watch', function () {
     global.isWatching = true;
     Gulp.watch('./app/js/*.js', ['scripts']);
     Gulp.watch('./app/js/*/*.js', ['scripts']);
-    Gulp.watch('./app/partials/*.html', ['html']);
+    Gulp.watch('./app/partials/*.html', ['media']);
+    Gulp.watch('./app/scss/*.scss', ['sass']);
 });
