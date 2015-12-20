@@ -1,0 +1,53 @@
+{
+  "name": "phoenix-angular",
+  "version": "1.0.0",
+  "description": "Phoenix and Angular stack.",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-animate": "^1.4.8",
+    "angular-aria": "^1.4.8",
+    "angular-local-storage": "^0.2.2",
+    "angular-material": "http://github.com/angular/bower-material/tarball/master",
+    "angular-route": "^1.4.8",
+    "angular-sanitize": "^1.4.8",
+    "animate": "0.0.5",
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-newer": "^1.1.0",
+    "gulp-sass": "^2.1.0",
+    "merge-stream": "^1.0.0",
+    "path": "^0.12.7",
+    "require-dir": "^0.3.0",
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigbassroller/phoenix-angular.git"
+  },
+  "keywords": [
+    "Phoenix",
+    "Elixir",
+    "Erlang",
+    "Angular",
+    "JavaScript",
+    "Sass",
+    "Material",
+    "Design",
+    "Bootstrap."
+  ],
+  "author": "Michael Chavez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bigbassroller/phoenix-angular/issues"
+  },
+  "homepage": "https://github.com/bigbassroller/phoenix-angular#readme"
+}
