@@ -8,8 +8,11 @@ Gulp.task('media', function () {
     // var general = Gulp.src('./client/media/**/*')
     //     .pipe(Gulp.dest(Path.join('./priv/static', 'fonts')));
 
-    // var fonts = Gulp.src('./node_modules/font-awesome/fonts/**')
-    //     .pipe(Gulp.dest(Path.join('./priv/static', 'fonts', 'font-awesome', 'fonts')));
+    var fonts = Gulp.src('./node_modules/bootstrap-sass/assets/fonts/bootstrap/**')
+        .pipe(Gulp.dest(Path.join('./priv/static', 'fonts', 'bootstrap')));
+
+    var fonts = Gulp.src('./node_modules/font-awesome/fonts/**')
+        .pipe(Gulp.dest(Path.join('./priv/static', 'fonts', 'font-awesome', 'fonts')));
 
     var img = Gulp.src('./app/img/*')
         .pipe(Gulp.dest(Path.join('./priv/static', 'img')));
