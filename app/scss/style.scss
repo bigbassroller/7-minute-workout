@@ -228,3 +228,9 @@ div[ng-view].ng-leave-active {
 .no-padding {
     padding: 0;
 }
+.navbar-header {
+    float: left;
+}
+ul.navbar-nav {
+    float: right;
+}
