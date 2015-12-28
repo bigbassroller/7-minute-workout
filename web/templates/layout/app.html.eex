@@ -47,12 +47,11 @@
     <script src="<%= static_path(@conn, "/js/vendor/angular-local-storage.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/root.js") %>"></script>
-
     <script src="<%= static_path(@conn, "/js/7MinWorkout/workout.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/7MinWorkout/workoutvideos.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/7MinWorkout/filters.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/7MinWorkout/services.js") %>"></script>
-
+    <script src="<%= static_path(@conn, "/js/workoutbuilder/services.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/shared/services.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/shared/directives.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/shared/model.js") %>"></script>
