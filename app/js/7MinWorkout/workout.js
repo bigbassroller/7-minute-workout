@@ -32,7 +32,6 @@ angular.module('7minWorkout')
 
       var restExercise;
       var exerciseIntervalPromise;
-
       var startWorkout = function () {
           $scope.workoutPlan = createWorkout();
           $scope.workoutTimeRemaining = $scope.workoutPlan.totalWorkoutDuration();
@@ -45,7 +44,6 @@ angular.module('7minWorkout')
               }),
               duration: $scope.workoutPlan.restBetweenExercise
           };
-
           workoutHistoryTracker.startTracking();
           $scope.currentExerciseIndex = -1;
           startExercise($scope.workoutPlan.exercises[0]);
@@ -59,9 +57,7 @@ angular.module('7minWorkout')
               $scope.currentExerciseIndex++;
               $scope.$emit(appEvents.workout.exerciseStarted, exercisePlan.details);
           }
-
           exerciseIntervalPromise = startExerciseTimeTracking();
-
       };
 
       var getNextExercise = function (currentExercisePlan) {
@@ -95,7 +91,7 @@ angular.module('7minWorkout')
               $scope.pauseWorkout();
           }
       }
-      
+
       var startExerciseTimeTracking = function () {
           var promise = $interval(function () {
               ++$scope.currentExerciseDuration;
@@ -121,6 +117,13 @@ angular.module('7minWorkout')
               $scope.pauseResumeToggle();
           }
       };
+
+      var workoutComplete = function () {
+          workoutHistoryTracker.endTracking(true);
+          $location.path('/finish');
+      }
+
+
       //$scope.$watch('currentExerciseDuration', function (nVal) {
       //    if (nVal == $scope.currentExercise.duration) {
       //        var next = getNextExercise($scope.currentExercise);
@@ -292,57 +295,12 @@ angular.module('7minWorkout')
           });
           workout.exercises.push({
               details: new Exercise({
-                  name: "plank",
-                  title: "Plank",
-                  description: "The plank (also called a front hold, hover, or abdominal bridge) is an isometric core strength exercise that involves maintaining a difficult position for extended periods of time. ",
-                  image: "img/Plank.png",
-                  nameSound: "content/plank.wav",
-                  videos: ["//www.youtube.com/embed/pSHjTRCQxIw", "//www.youtube.com/embed/TvxNkmjdhMM"],
-                  procedure: "Get into pushup position on the floor.\
-                              Bend your elbows 90 degrees and rest your weight on your forearms.\
-                              Your elbows should be directly beneath your shoulders, and your body should form a straight line from head to feet.\
-                              Hold this position."
-              }),
-              duration: 30
-          });
-          workout.exercises.push({
-              details: new Exercise({
-                  name: "highKnees",
-                  title: "High Knees",
-                  description: "A form exercise that develops strength and endurance of the hip flexors and quads and stretches the hip extensors.",
-                  image: "img/highknees.png",
-                  nameSound: "content/highknees.wav",
-                  videos: ["//www.youtube.com/embed/OAJ_J3EZkdY", "//www.youtube.com/embed/8opcQdC-V-U"],
-                  procedure: "Start standing with feet hip-width apart. \
-                              Do inplace jog with your knees lifting as much as possible towards your chest."
-              }),
-              duration: 30
-          });
-          workout.exercises.push({
-              details: new Exercise({
-                  name: "lunges",
-                  title: "Lunges",
-                  description: "Lunges are a good exercise for strengthening, sculpting and building several muscles/muscle groups, including the quadriceps (or thighs), the gluteus maximus (or buttocks) as well as the hamstrings. ",
-                  image: "img/lunges.png",
-                  nameSound: "content/lunge.wav",
-                  videos: ["//www.youtube.com/embed/Z2n58m2i4jg"],
-                  procedure: "Stand erect with your feet about one shoulder width apart.\
-                              Put your hands on your hips, keep your back as straight as possible, relax your shoulders and keep your eyes facing directly ahead.\
-                              Take a large step forward with one leg.\
-                              As you step forward, lower your hips and bend your knees until they both form 90 degree angles.\
-                              Return to starting position.\
-                              Repeat with your alternate leg."
-              }),
-              duration: 30
-          });
-          workout.exercises.push({
-              details: new Exercise({
                   name: "pushupNRotate",
                   title: "Pushup And Rotate",
                   description: "A variation of pushup that requires you to rotate.",
                   image: "img/pushupNRotate.png",
                   nameSound: "content/pushupandrotate.wav",
-                  videos: ["//www.youtube.com/embed/qHQ_E-f5278"],
+                  videos: ["qHQ_E-f5278"],
                   procedure: "Assume the classic pushup position, but as you come up, rotate your body so your right arm lifts up and extends overhead.\
                               Return to the starting position, lower yourself, then push up and rotate till your left hand points toward the ceiling."
               }),
@@ -355,7 +313,7 @@ angular.module('7minWorkout')
                   description: "A variation to Plank done using one hand only",
                   image: "img/sideplank.png",
                   nameSound: "content/sideplank.wav",
-                  videos: ["//www.youtube.com/embed/wqzrb67Dwf8", "//www.youtube.com/embed/_rdfjFSFKMY"],
+                  videos: ["wqzrb67Dwf8", "_rdfjFSFKMY"],
                   procedure: "Lie on your side, in a straight line from head to feet, resting on your forearm.\
                               Your elbow should be directly under your shoulder.\
                               With your abdominals gently contracted, lift your hips off the floor, maintaining the line.\
@@ -374,7 +332,7 @@ angular.module('7minWorkout')
   }]);
 
 angular.module('7minWorkout')
-  .controller('WorkoutAudioController', ['$scope', '$timeout', function ($scope, $timeout) {
+  .controller('WorkoutAudioController', ['$scope', '$interval', '$location', '$timeout', function ($scope, $interval, $location, $timeout) {
       $scope.exercisesAudio = [];
 
       var workoutPlanwatch = $scope.$watch('workoutPlan', function (newValue, oldValue) {
@@ -401,7 +359,7 @@ angular.module('7minWorkout')
 
       $scope.$watch('currentExerciseDuration', function (newValue, oldValue) {
           if (newValue) {
-              if (newValue == $scope.currentExercise.duration / 2 && $scope.currentExercise.details.name != 'rest') {
+              if (newValue == Math.floor($scope.currentExercise.duration / 2) && $scope.currentExercise.details.name != 'rest') {
                   $scope.halfWayAudio.play();
               }
               else if (newValue == $scope.currentExercise.duration - 3) {
@@ -429,4 +387,5 @@ angular.module('7minWorkout')
       }
 
       init();
+
   }]);

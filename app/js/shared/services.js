@@ -15,6 +15,41 @@ angular.module('app')
             return exercises;
         };
 
+        service.getExercise = function (name) {
+            var result = null;
+            angular.forEach(service.getExercises(), function (exercise) {
+                if (exercise.name === name) result = angular.copy(exercise);
+            });
+            return result;
+        };
+
+        service.updateExercise = function (exercise) {
+            angular.forEach(exercises, function (e, index) {
+                if (e.name === exercise.name) {
+                    exercises[index] = exercise;
+                }
+            });
+            return exercise;
+        };
+
+        service.addExercise = function (exercise) {
+            if (exercise.name) {
+                exercises.push(exercise);
+                return exercise;
+            }
+        }
+
+        service.deleteExercise = function (exerciseName) {
+            var exerciseIndex;
+            angular.forEach(exercises, function (e, index) {
+                if (e.name === exerciseName) {
+                    exerciseIndex = index;
+                }
+            });
+            if (exerciseIndex >= 0) exercises.splice(exerciseIndex, 1);
+        };
+
+
         service.getWorkouts = function () {
             return workouts;
         };
@@ -252,9 +287,36 @@ angular.module('app')
         service.getWorkout = function (name) {
             var result = null;
             angular.forEach(service.getWorkouts(), function (workout) {
-                if (workout.name === name) result = workout;
+                if (workout.name === name) result = angular.copy(workout);
             });
             return result;
+        };
+
+        service.updateWorkout = function (workout) {
+            for (var i = 0; i < workouts.length; i++) {
+                if (workouts[i].name === workout.name) {
+                    workouts[i] = workout;
+                    break;
+                }
+            }
+            return workout;
+        };
+
+        service.addWorkout = function (workout) {
+            if (workout.name) {
+                workouts.push(workout);
+                return workout;
+            }
+        }
+
+        service.deleteWorkout = function (workoutName) {
+            var workoutIndex;
+            angular.forEach(workouts, function (w, index) {
+                if (w.name === workoutName) {
+                    workoutIndex = index;
+                }
+            });
+            workouts.splice(workoutIndex, 1);
         };
 
         var init = function () {
